@@ -4,24 +4,33 @@ import redis
 import urllib
 import urllib2
 from bs4 import BeautifulSoup
-
+import MySQLdb
+import time
+import pymongo
 header = {"User-Agent":" Mozilla/5.0 (Linux; U; Android 5.1; zh-CN; ZTE C880U Build/LMY47D) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/40.0.2214.89 UCBrowser/11.5.8.945 Mobile Safari/537.36",
 'Connection':'Keep-Alive',
 }
 filepath="e:\zhihu/"
 people_url='https://www.zhihu.com/people/\S+["$]'
 source="https://www.zhihu.com/question/"
-import pymongo
+
 client=pymongo.MongoClient("localhost",27017)
 db=client.zhihu
 zhihu = redis.Redis(host="127.0.0.1", port=6379, db=0)
 #datas=db.user.find()
+
+conn = MySQLdb.connect(host='localhost', user='root', passwd='root', db='zhihu_info', port=3306)
 '''for x in datas:
     if x.get("url")!=None:
         print x.get("url")
 '''
+
 def getUser():
-    for x in range(48000005,48000010):
+    times = 1
+    for x in range(48000000,48001010):
+        times+=1
+        if times%10==0:
+            time.sleep(1)
         page=urllib.urlopen(source+str(x),None,header).read()
         #print page
         '''
@@ -33,43 +42,97 @@ def getUser():
 
         #file=open(filepath+str(x)+".html","r+").read()
         urls=re.findall(people_url,page)
-    for y in urls:
+        for y in urls:
 
-        #re.split(r'" ',y)
-        y=y[:-1]
-        zhihu.sadd("urls",y)
-        print y
+            #re.split(r'" ',y)
+            y=y[:-1]
+            zhihu.sadd("urls",y)
+            #print y
 def getUserInfo():
-    url=zhihu.spop('urls')
-    info=urllib.urlopen(url,None,header).read()
+    #save usr_links to file
+    '''
+    usr = zhihu.smembers('urls')
+    file = open('E:/usr.txt', 'w+')
+    for x in usr:
+        file.write(x)
+        file.write('\n')
+    file.close()
+    '''
+    sleep=1
+    for x in zhihu.smembers("urls"):
+        sleep+=1
+        if sleep%10==0:
+            time.sleep(1)
+            url = zhihu.spop('urls')
+            info = urllib.urlopen(url, None, header).read()
 
-    '''
-    soup=BeautifulSoup(info,'lxml')
-    care = soup.find_all('div', class_='NumberBoard-value')
-    good = soup.find_all('div', class_='Profile-sideColumnItemValue')
-    '''
-    name=re.split(r'/',url)[4]
-    care_num = re.findall(r'<div class="NumberBoard-value">\d+', info)
-    agree_num = re.findall(r'获得 \d+ 次赞同', info)
-    thank_num = re.findall(r'获得 \d+ 次感谢', info)
-    collection_num = re.findall(r'\d+ 次收藏', info)
-    thank=re.split(' ', thank_num[0])[1]
-    be_collectioned=re.split(' ', collection_num[0])[0]
-    agree=re.split(' ', agree_num[0])[1]
-    care=re.sub(r'\D', '', care_num[1])
-    print agree,care,be_collectioned
-    db.userpage.insert({
-        'question_id': name,
-        'content': info
-    })
-    db.user.insert({
-        'user_name':name,
-        'care_number':care,
-        'thank_number':thank,
-        'agree_nuber':agree,
-        'collectioned':be_collectioned
-    })
-getUser()
+            '''
+            soup=BeautifulSoup(info,'lxml')
+            care = soup.find_all('div', class_='NumberBoard-value')
+            good = soup.find_all('div', class_='Profile-sideColumnItemValue')
+            '''
+            try:
+                name = re.split(r'/', url)[4]
+                care_num = re.findall(r'<div class="NumberBoard-value">\d+', info)
+                if care_num:
+                    care = re.sub(r'\D', '', care_num[1])
+
+                else:
+                    care = 0
+                agree_num = re.findall(r'获得 \d+ 次赞同', info)
+                if agree_num:
+                   agree = re.split(' ', agree_num[0])[1]
+
+                else:
+                    agree = 0
+                thank_num = re.findall(r'获得 \d+ 次感谢', info)
+                if thank_num:
+
+                    thank = re.split(' ', thank_num[0])[1]
+
+                else:
+                    thank = 0
+                collection_num = re.findall(r'\d+ 次收藏', info)
+                if collection_num:
+
+                    be_collectioned = re.split(' ', collection_num[0])[0]
+
+                else:
+                    be_collectioned = 0
+
+
+
+                # print agree,care,be_collectioned
+                infoList = [name, care, agree, thank, be_collectioned]
+                insertToMysql(infoList)
+            except ValueError:
+                pass
+
+
+
+
+            '''
+            db.userpage.insert({
+                'question_id': name,
+                'content': info
+            })
+            db.user.insert({
+                'user_name': name,
+                'care_number': care,
+                'thank_number': thank,
+                'agree_nuber': agree,
+                'collectioned': be_collectioned
+            })'''
+
+def insertToMysql(list):
+
+    cur = conn.cursor()
+    sql="insert into user(name,care_num,agree_num,thank_num,collection_num)values('%s',%s,%s,%s,%s)"%(list[0],list[1],list[2],list[3],list[4])
+    cur.execute(sql)
+    conn.commit()
+    cur.close()
+
+#getUser()
 getUserInfo()
 
 
