@@ -8,6 +8,7 @@ from selenium import webdriver
 import re
 from bs4 import BeautifulSoup
 #req=urllib2.urlopen("https://www.zhihu.com/topic")
+import redis
 '''
 browser=webdriver.Chrome()
 try:
@@ -23,13 +24,49 @@ header = {"User-Agent":" Mozilla/5.0 (Linux; U; Android 5.1; zh-CN; ZTE C880U Bu
 }
 #page=urllib.urlopen("https://www.zhihu.com/people/suan-le-ba/answers",None,header).read()
 #print page
-file=open('E:\zhihu/zhihuUser.html','r+').read()
+#file=open('E:\zhihu/zhihuUser.html','r+').read()
+zhihu = redis.Redis(host="127.0.0.1", port=6379, db=0)
+
+def getUser():
+    originUrl='https://www.zhihu.com/people/wang-ruo-lan-73'
+    zhihu.sadd('urls',originUrl)
+    people_url = 'https://www.zhihu.com/people/\S+["$]'
+    while zhihu.smembers('urls'):
+
+        page = urllib.urlopen(zhihu.spop('urls'), None, header).read()
+        url = re.findall(people_url, page)
+        print url
+
+        for y in url:
+            y = y[:-1]
+            zhihu.sadd('urls',y)
+
+'''
+    for x in urls:
+        page = urllib.urlopen(x, None, header).read()
+        url = re.findall(people_url, page)
+        print urls
+
+        for y in url:
+            y = y[:-1]
+            urls.add(y)
+            print y
+'''
+
+
+getUser()
+
+
+
+
+
 '''
 soup=BeautifulSoup(file,"lxml")
 print '关注他的人数量'
 care = soup.find_all('div', class_='NumberBoard-value')
 #for y in care:
 print care[1]
+'''
 '''
 #cares=care[1]
 care_num=re.findall(r'<div class="NumberBoard-value">\d+',file)
@@ -52,3 +89,4 @@ print re.sub(r'\D','',care_num[1])
 #for x in se:
     #ok=re.split(' ',x[1])
     #print ok[1]
+'''

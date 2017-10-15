@@ -1,0 +1,4 @@
+proxies=true
+user-agents=true
+sleep=true
+

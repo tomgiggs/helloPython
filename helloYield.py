@@ -34,17 +34,18 @@ def helloyield():
     yield hello()
 
 isgood=helloyield()
+'''
+
 print isgood.next()
 print isgood.next()
 print isgood.next()
 print isgood.next()
-print isgood.next()
-print isgood.next()
-print isgood.next()
-print isgood.next()
-print isgood.next()
-print isgood.next()
-''''''
+'''
+
+'''
+for x in isgood:
+    print x
+'''
 def loop():
     yield '1'
     print helloyield().next()
@@ -65,3 +66,14 @@ print test.next()
 print test.next()
 print test.next()
 '''
+def calculator():
+    print 'first'
+    yield 'i am a gentleman'
+    for m in range(5,13):
+        yield m
+    yield 'game over'
+
+
+you=calculator()
+for x in you:
+    print x
