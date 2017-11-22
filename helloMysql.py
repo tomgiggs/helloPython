@@ -42,5 +42,24 @@ collection = '32'
 sql = 'insert into user values (%d,"%s",%s,%s,%s,%s)'%(12,name, care, agree, thank, collection)
 #print sql
 '''
-insert()
+
+def createTable():
+    try:
+        conn = MySQLdb.connect(host='localhost', user='root', passwd='root', db='zhihu_info', port=3306)
+        cur = conn.cursor()
+        sql = 'create table user_INFO(id INT NOT NULL AUTO_INCREMENT,   name VARCHAR(50) NOT NULL,care_num VARCHAR(10) ,  agree_num VARCHAR(10),thank_num VARCHAR(10) NOT NULL, collection_num VARCHAR(10) NOT NULL,  PRIMARY KEY ( id ));'
+        cur.execute(sql)
+        cur.close()
+        conn.close()
+        print 'success'
+
+    except:
+        cur.close()
+        conn.close()
+        print 'fail'
+
+
+
+#insert()
 #query()
+createTable()

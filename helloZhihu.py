@@ -3,7 +3,7 @@ import re
 import redis
 import urllib
 import urllib2
-from bs4 import BeautifulSoup
+#from bs4 import BeautifulSoup
 import MySQLdb
 import time
 import pymongo
@@ -11,6 +11,9 @@ import threading
 import thread
 import random
 import logging
+import smtplib
+from email.mime.text import MIMEText
+from email.header import Header
 header = {"User-Agent":" Mozilla/5.0 (Linux; U; Android 5.1; zh-CN; ZTE C880U Build/LMY47D) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/40.0.2214.89 UCBrowser/11.5.8.945 Mobile Safari/537.36",
 'Connection':'Keep-Alive',
 }
@@ -144,7 +147,37 @@ def insertToMysql(list):
     conn.commit()
     cur.close()
 
+def sendMail():
+    sender='zamjbn@163.com'
+    receiver = '1369796093@qq.com'
+    message = MIMEText('爬虫已经爬去完成，可以下载数据了.', 'plain', 'utf-8')
+    message['From'] = Header(sender)
+    message['To'] = Header(receiver)
+    subject = 'Python 邮件通知'
+    message['Subject'] = Header(subject, 'utf-8')
+    smtpObj = smtplib.SMTP_SSL("smtp.163.com")
+    smtpObj.login(sender, 'cyl0516')
+    smtpObj.sendmail(sender, receiver, message.as_string())
+    smtpObj.quit()
+    print "邮件发送成功"
+
+def createTable():
+    try:
+        conn = MySQLdb.connect(host='localhost', user='root', passwd='root', db='zhihu_info', port=3306)
+        cur = conn.cursor()
+        sql = 'create table user_INFO(id INT NOT NULL AUTO_INCREMENT,   name VARCHAR(50) NOT NULL,care_num VARCHAR(10) ,  agree_num VARCHAR(10),thank_num VARCHAR(10) NOT NULL, collection_num VARCHAR(10) NOT NULL,  PRIMARY KEY ( id ));'
+        cur.execute(sql)
+        cur.close()
+        conn.close()
+        print 'success'
+
+    except:
+        cur.close()
+        conn.close()
+        print 'fail'
+createTable()
 getUser()
 getUserInfo()
+sendMail()
 
 
