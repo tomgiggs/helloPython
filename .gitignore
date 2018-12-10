@@ -1,0 +1,15 @@
+.idea
+.idea/
+*.pyc
+*.sln
+.vs/
+TensorFlow/data/
+.vscode
+*.iml
+*.csv
+*.gz
+*.exe
+*.xml
+test/
+
+

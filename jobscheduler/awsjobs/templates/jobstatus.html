@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>job_status</title>
+</head>
+<body>
+运行中任务状态
+{{job}}
+
+<h2>注册的服务器</h2>
+<ul>
+{% for s in servers %}
+   <li>  {{ s }} </li>
+{%  endfor %}
+
+</ul>
+
+<h2>运行中的任务</h2>
+<ul>
+    {% for s in running %}
+    <li>  {{ s }} </li>
+    {%  endfor %}
+
+</ul>
+<h2>  已结束的任务 </h2>
+<ul>
+    {% for s in finshed %}
+    <li>  {{ s }} </li>
+    {%  endfor %}
+
+</ul>
+
+<h2> 失败的任务 </h2>
+<ul>
+    {% for s in failed %}
+    <li>  {{ s }} </li>
+    {%  endfor %}
+
+</ul>
+
+
+
+</body>
+</html>

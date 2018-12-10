@@ -1,0 +1,24 @@
+# An ultra-simple topology which shows off Storm and the pyleus.storm library
+#运行时使用 pyleus -c pyleus.conf --verbose  build ./pyleus_topology.yaml 命令生成jar包
+#然后使用pyleus -c pyleus.conf --verbose submit -n 127.0.0.1  pystorm_demo.jar  运行任务，然后会很遗憾的发现，pyleus不支持storm 1 以上的版本
+#Caused by: java.lang.ClassNotFoundException: backtype.storm.topology.IRichBolt，。。。。一顿操作猛如虎，一看结果0-5，没办法只好改用streamparse来做了。
+#贴个文档地址 https://streamparse.readthedocs.io/en/latest/quickstart.html
+
+name: pystorm_demo # 自定义拓扑的名字
+topology:
+    - spout:
+        name: spout_demo # 自定义spout组件的名字
+        module: spout_demo # 代码是 spout_demo.py
+
+    - bolt:
+        name: bolt_demo # 自定义bolt组件的名字
+        module: bolt_demo # bolt_demo.py
+        parallelism_hint: 3 # 并发的节点数
+        groupings:
+            - shuffle_grouping: spout_demo # 以洗牌模式接收来自组件的数据流
+
+    - bolt:
+        name: print_bolt
+        module: print_bolt
+        groupings:
+            - global_grouping: bolt_demo

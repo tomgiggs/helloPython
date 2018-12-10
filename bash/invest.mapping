@@ -1,0 +1,45 @@
+{ "settings":{
+    "number_of_shards": 1,
+    "number_of_replicas": 1
+
+  },
+        "mappings": {
+            "investment": {
+                "properties": {
+                    "applicate_area": {
+                        "type": "keyword"
+                    },
+                    "build_address": {
+                        "type": "text",
+                        "analyzer": "ik_max_word"
+                    },
+                    "build_area": {
+                        "type": "keyword"
+                    },
+                    "industry_id": {
+                        "type": "text",
+                        "analyzer": "ik_max_word"
+                    },
+                    "linkman": {
+                        "type": "keyword"
+                    },
+                    "proj_app": {
+                        "type": "text",
+                        "analyzer": "ik_max_word"
+                    },
+                    "proj_id": {
+                        "type": "text",
+                        "analyzer": "ik_max_word"
+                    },
+                    "proj_name": {
+                        "type": "text",
+                        "analyzer": "ik_max_word"
+                    },
+                    "total_investment": {
+                        "type": "double"
+                    }
+                }
+            }
+        }
+
+}
