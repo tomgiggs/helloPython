@@ -74,3 +74,12 @@ print(age_group.sum().reset_index().sort_values(by='Purchase',ascending=False,in
 #看看购买力最强的消费者有什么特征
 
 
+
+
+
+
+
+
+#-------------------
+#如何使用聚类算法给消费者分组呢？
+
