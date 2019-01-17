@@ -4,7 +4,7 @@ from tensorflow.examples.tutorials.mnist import input_data
 
 def main():
     # Import data
-    mnist = input_data.read_data_sets(r'D:\data\tf\mnist_train')
+    mnist = input_data.read_data_sets(r'E:\data\dataset\tf_data')
 
     # Create the model
     x = tf.placeholder(tf.float32, [None, 784])

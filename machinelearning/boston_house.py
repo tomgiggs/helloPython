@@ -6,6 +6,7 @@ from sklearn import linear_model
 import matplotlib.pyplot as plt
 from sklearn import preprocessing
 binarizer = preprocessing.Binarizer().fit()
+# from mpl_toolkits.mplot3d import Axes3D #绘制三维图形
 # lr = linear_model.LinearRegression()
 # boston = datasets.load_boston()
 # y = boston.target
