@@ -10,15 +10,14 @@ y_data = np.dot([0.100, 0.200], x_data) + 0.300
 b = tf.Variable(tf.zeros([1]))
 W = tf.Variable(tf.random_uniform([1, 2], -1.0, 1.0))
 y = tf.matmul(W, x_data) + b
-
 # 最小化方差
 loss = tf.reduce_mean(tf.square(y - y_data))
 optimizer = tf.train.GradientDescentOptimizer(0.5)
 train = optimizer.minimize(loss)
-
+#简单一行表示就是下面这样：
+tf.train.GradientDescentOptimizer(0.5).minimize(tf.reduce_mean(tf.square(tf.matmul(W, x_data) + b - y_data)))
 # 初始化变量
 init = tf.initialize_all_variables()
-
 # 启动图 (graph)
 sess = tf.Session()
 sess.run(init)

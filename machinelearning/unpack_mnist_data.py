@@ -68,14 +68,14 @@ def unpack_train():
     write_file(train_data,train_label,data_root)
 def unpack_test():
     data_root =  os.path.join(source_dir,'mnist_test') #需要修改的路径
-    train_data_file = os.path.join(source_dir,' t10k-images.idx3-ubyte')#需要修改的路径
+    train_data_file = os.path.join(source_dir,'t10k-images.idx3-ubyte')#需要修改的路径
     train_label_path = os.path.join(source_dir,'t10k-labels.idx1-ubyte')#需要修改的路径
     train_data = unpack_data(train_data_file)
     train_label = get_label(train_label_path)
     write_file(train_data,train_label,data_root)
 
 def main():
-    unpack_train()
+    # unpack_train()
     unpack_test()
 
 main()

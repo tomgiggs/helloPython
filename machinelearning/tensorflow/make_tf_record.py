@@ -11,7 +11,7 @@ import numpy as np
 def make_tf_record():
     cwd = r'D:\data\tf\mnist_test'
     classes = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-    writer = tf.python_io.TFRecordWriter("mnist2.tfrecords")
+    writer = tf.python_io.TFRecordWriter("mnist.tfrecords")
 
     for index, name in enumerate(classes):
         class_path = cwd + '\\' + name + '\\'

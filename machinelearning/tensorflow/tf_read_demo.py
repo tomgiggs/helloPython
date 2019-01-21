@@ -39,6 +39,18 @@ img = tf.image.decode_jpeg(image_raw)  #Tensor
 #     print(img.eval().dtype)
 #     plt.imshow(img.eval())
 #     plt.show()
+#--------------------
+# reader = tf.TFRecordReader()
+# key, value = reader.read(fileNameQue)
+# features = tf.parse_single_example(value, features={'label': tf.FixedLenFeature([], tf.int64),
+#                                                     'img': tf.FixedLenFeature([], tf.string),})
+# img = tf.decode_raw(features["img"], tf.uint8)
+# img = tf.reshape(img, [28,28]) # 恢复图像原始大小
+# label = tf.cast(features["label"], tf.int32)
+# return img, label
 
-
-
+def get_data(file_names):
+    label = ['1',]
+    img_value = tf.read_file(r'D:\data\tf\mnist_train\1\mnist_train_3.png')
+    img = tf.image.decode_image(img_value,channels=3)
+    return label, img

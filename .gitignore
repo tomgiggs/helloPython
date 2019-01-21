@@ -11,5 +11,5 @@ TensorFlow/data/
 *.exe
 *.xml
 test/
-
+machinelearning/ckpt/
 
