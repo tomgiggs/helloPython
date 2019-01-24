@@ -12,4 +12,5 @@ TensorFlow/data/
 *.xml
 test/
 machinelearning/ckpt/
+logs/
 
