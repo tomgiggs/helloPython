@@ -1,0 +1,13 @@
+syntax = "proto2";
+package msg; //这个一般和文件一样？？
+
+// option optimize_for = LITE_RUNTIME;
+message Account{
+    required string accountName = 1; //帐号名
+    required string pwd = 2; //帐号密码
+};
+message AccountList{
+    required int32 index = 1;
+    repeated Account list = 2;
+    
+};
