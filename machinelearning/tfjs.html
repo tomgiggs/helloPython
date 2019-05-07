@@ -1,0 +1,23 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter"></script>
+</head>
+<body>
+  <img style="display: none" id="cat" src="high-detail.jpg" width="224" height="224">
+ 
+  <script>
+const MODEL_URL = './tensorflowjs_model.pb'
+const WEIGHTS_URL = './weights_manifest.json'
+async function fun(){
+    const model = await tf.loadFrozenModel(MODEL_URL, WEIGHTS_URL)
+      const cs = tf.tensor([[1.0,1.0],[0.0,0.0]])
+	cs.print()
+	model.predict(cs).print()
+}
+fun()
+  </script>
+</body>
+</html>

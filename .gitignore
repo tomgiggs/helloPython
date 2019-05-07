@@ -13,4 +13,5 @@ TensorFlow/data/
 test/
 machinelearning/ckpt/
 logs/
-
+ipynb/.ipynb_checkpoints/
+ipynb/checkpoint/
