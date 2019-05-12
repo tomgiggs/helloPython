@@ -4,7 +4,7 @@ from tensorflow.examples.tutorials.mnist import input_data
 
 #摘自官网
 def mnist_demo():
-    mnist = input_data.read_data_sets(r'E:\data\dataset\tf_data') # 读取数据，如果没有就下载
+    mnist = input_data.read_data_sets(r'E:\dataset\tf_data') # 读取数据，如果没有就下载
     x = tf.placeholder(tf.float32, [None, 784]) # 使用占位符声明后面变量会存储的数据类型及维度信息等（因为底层用C实现，
     # 所以需要类型信息，还有维度信息（创建多维数组要用到））
     W = tf.Variable(tf.zeros([784, 10]))

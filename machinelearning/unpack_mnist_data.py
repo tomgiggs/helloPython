@@ -3,7 +3,7 @@ import numpy as np
 import struct
 from PIL import Image
 import os
-source_dir = r'E:\data\dataset\tf_data'
+source_dir = r'E:\dataset\tf_data'
 
 def unpack_data(data_file=''):
     # It's 47040016B, but we should set to 47040000B
@@ -75,7 +75,7 @@ def unpack_test():
     write_file(train_data,train_label,data_root)
 
 def main():
-    # unpack_train()
-    unpack_test()
+    unpack_train()
+    # unpack_test()
 
 main()

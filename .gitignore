@@ -10,8 +10,16 @@ TensorFlow/data/
 *.gz
 *.exe
 *.xml
+*.mp4
+*.jpg
+*.flv
+*.png
+
 test/
 machinelearning/ckpt/
 logs/
 ipynb/.ipynb_checkpoints/
 ipynb/checkpoint/
+ipynb/chkpt/
+machinelearning/tensorflowx/ckpt/
+
