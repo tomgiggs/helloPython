@@ -92,7 +92,7 @@ def read_img_by_np():
     img = Image.fromarray(img_np)
     img.save('./array_to_img.jpg')  # save image as a file
 
-# img = cv2.imread('iceage.jpg') #读取图片
-# cvt_photo(img)
-# cv2.waitKey(0)
-# cv2.destroyAllWindows()#关闭所有图像显示
+img = cv2.imread('iceage.jpg') #读取图片
+cvt_photo(img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()#关闭所有图像显示

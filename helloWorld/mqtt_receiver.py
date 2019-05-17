@@ -1,6 +1,6 @@
 import paho.mqtt.client as mqtt
 
-host = "192.168.254.129"
+host = "192.168.9.131"
 port = 1883
 
 def on_connect(client, userdata, flags, rc):

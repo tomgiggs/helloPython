@@ -2,8 +2,26 @@
 '''
 tensorboard是使用TensorFlow运行过程中保存的数据来显示运行过程的，如果在运行过程中不保存数据是没有数据可以查看的。
 代码开始运行可以使用 tensorboard --logdir logs 启动tensorboard面板，然后使用http://localhost:6006或者复制tensorboard给出的地址在浏览器查看页面
+如果启动不了报错OSerror 就修改XXX\site-packages\tensorboard\manager.py
+serialize=lambda dt: int((dt - datetime.datetime.fromtimestamp(0)).total_seconds()),=====> serialize=lambda dt: int(dt.strftime('%S')),就可以启动了
 滚动滚轮放大图，双击图中节点可以看到每个图更具体的内容。
 在面板上点击histograms可以查看变量变化情况，在面板scalars可以看到函数收敛情况（损失函数下降情况）
+使用tensorflowjs_converter  将模型转换成可供js读取的模型，教程在这https://www.tensorflow.org/js/tutorials/conversion/import_saved_model
+安装官网给出的样例命令死活执行不成功，最后只能自己去源码看命令行的解析是什么样的，Linux下先找到包放置的位置：
+先找到命令行的内容：
+whereis tensorflowjs_converter
+vi /usr/local/bin/tensorflowjs_converter
+看到引用了 from tensorflowjs.converters.converter import main
+找到包位置，进入文件：
+vi /usr/local/lib/python3.6/dist-packages/tensorflowjs/converters/converter.py
+最后看到需要的参数形式：
+tensorflowjs_converter --input_format=tf_saved_model --output_format='tfjs_graph_model' --saved_model_tags=serve  ./ckpt ./web_model
+还是报错OSError: SavedModel file does not exist at: ./ckpt/{saved_model.pbtxt|saved_model.pb}
+问题是我保存的模型没有.pb文件。。。。
+-------
+python3 saved_model_cli.py show --dir=model2/  --all 用来查看.pb文件里面模型的信息：模型的输入/输出的名称、数据类型、shape以及方法名称
+python3 saved_model_cli.py show --dir=models/ --tag_set serve --signature_def serving_default
+
 '''
 
 import tensorflow as tf
@@ -39,7 +57,7 @@ with tf.name_scope('train') as scope:
 with tf.name_scope('init') as scope:
     init = tf.global_variables_initializer()
 sess = tf.Session()
-writer = tf.summary.FileWriter("../../logs/", sess.graph)  # 添加这个语句才能保存运行的图，这个会在图创建完成就保存，不需要等到开始运行再保存
+writer = tf.summary.FileWriter("./logs/", sess.graph)  # 添加这个语句才能保存运行的图，这个会在图创建完成就保存，不需要等到开始运行再保存
 
 sess.run(init)
 merged = tf.summary.merge_all()  # 将所有summary全部保存到磁盘，以便tensorboard显示。如果没有特殊要求，一般用这一句就可一显示训练时的各种信息了。

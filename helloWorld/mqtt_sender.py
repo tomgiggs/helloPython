@@ -1,6 +1,6 @@
 import paho.mqtt.client as mqtt
 import time
-host = "192.168.254.128"
+host = "192.168.9.131"
 port = 1883
 
 def on_connect(client,userdata, flags, rc):
@@ -18,7 +18,7 @@ def send():
     client.connect(host, port, 60)
     for i in range(100):
         time.sleep(2)
-        client.publish("app2dev/","hello i am producer python", 1)
+        client.publish("app2dev/","hello i am producer python 131", 1)
     client.loop_forever()
 
 

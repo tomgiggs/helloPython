@@ -6,7 +6,7 @@ import os
 import tensorflow as tf
 import numpy as np
 from tensorflow.examples.tutorials.mnist import mnist
-source_fold = r'E:\data\dataset\tf_data\mnist_test'
+source_fold = r'E:\dataset\tf_data\mnist_test'
 
 def read_data(fileNameQue=None):
     class MnistRecord(object):

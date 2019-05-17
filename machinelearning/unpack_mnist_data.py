@@ -75,7 +75,7 @@ def unpack_test():
     write_file(train_data,train_label,data_root)
 
 def main():
-    unpack_train()
-    # unpack_test()
+    # unpack_train()
+    unpack_test()
 
 main()
