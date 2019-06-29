@@ -1,0 +1,10 @@
+#美团技术文章链接：https://tech.meituan.com//page/66.html，有空再爬
+------------
+#网易云音乐api接口：https://github.com/darknessomi/musicbox/blob/master/NEMbox/api.py
+http://music.163.com/api/playlist/detail?id=151620
+http://music.163.com/api/artist/33333
+http://music.163.com/api/song/lyric?os=pc&lv=-1&kv=-1&tv=-1&id=34886980
+http://music.163.com/api/v1/resource/comments/R_SO_4_864069318/?rid=R_SO_4_864069318&offset=20&total=40&limit=20
+
+
+

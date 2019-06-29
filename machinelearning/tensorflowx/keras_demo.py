@@ -42,7 +42,7 @@ x_train, x_test, y_train, y_test = train_test_split(images, labels, test_size=0.
 # y_shape: (357,)
 
 # #------------模型1---------
-# x_train = x_train.reshape(x_train.shape[0], -1) / 255.0
+# x_train = x_train.reshape(x_train.shape[0], -1) / 255.0 #这个是给拍平了吗，那不就丢失了很多信息了？图像是通过和周围的像素点一起计算的，这样有问题吧
 # x_test = x_test.reshape(x_test.shape[0], -1) / 255.0
 # #再次查看模型维度
 # print('x_shape:', x_train.shape)
