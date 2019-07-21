@@ -19,7 +19,6 @@ header = {
     # "Connection":"close",
     "User-Agent":"",
     "Cache-Control": "no-cache",
-    "Cookie":"UM_distinctid=16b9377b0bf4de-0cc07dd30e03bf-e343166-232800-16b9377b0c09cd; aliyungf_tc=AQAAAJSX8itICAgAneRabuzg5mxwbuRU; __ads_session=KcTmbLjQTgmdsaMDFAA=; Hm_lvt_94a1e06bbce219d29285cee2e37d1d26=1561547223,1561601848; Hm_lpvt_94a1e06bbce219d29285cee2e37d1d26=1561601848; CNZZDATA1261102524=509074382-1561546649-null%7C1561598061; route=030e64943c5930d7318fe4a07bfd2a3c; JSESSIONID=22E83CBB7866CFC18116C3206F66CA68; uuid=d134a4f8-7150-40f1-b5a0-7e2e46cb622f; SERVERID=srv-omp-ali-portal12_80",
     # "Host":"www.thepaper.cn",
     "Upgrade-Insecure-Requests":"1"
 }
