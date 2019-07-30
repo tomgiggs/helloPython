@@ -14,7 +14,7 @@ TensorFlow/data/
 *.jpg
 *.flv
 *.png
-
+*.h5
 test/
 machinelearning/ckpt/
 logs/
@@ -22,4 +22,5 @@ ipynb/.ipynb_checkpoints/
 ipynb/checkpoint/
 ipynb/chkpt/
 machinelearning/tensorflowx/ckpt/
-
+machinelearning/photo/
+machinelearning/data/

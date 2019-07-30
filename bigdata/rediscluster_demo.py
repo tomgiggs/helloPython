@@ -2,8 +2,7 @@
 # import redis.Redis
 from  rediscluster.client import StrictRedisCluster
 # from rediscluster.client
-nodes = [{'host':'114.116.43.125','port':9001},
-                                                                                   {'host':'114.116.43.125','port':9002},
+nodes = [{'host':'114.116.43.125','port':9001}, {'host':'114.116.43.125','port':9002},
                                                    {'host': '114.116.43.125', 'port': 9003},{'host':'114.116.43.125','port':9004},
                                                    {'host': '114.116.43.125', 'port': 9005},{'host':'114.116.43.125','port':9006}]
 cluster_client = StrictRedisCluster(startup_nodes=nodes,

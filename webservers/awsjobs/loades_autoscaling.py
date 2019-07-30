@@ -30,10 +30,10 @@ try:
     import thread
 except:
     import _thread
-from jobscheduler.awsjobs.BaseJob import Jobs
+from webservers.awsjobs.BaseJob import Jobs
 # filename = os.path.join(app.instance_path, 'application.cfg')
 # app.config.from_envvar('FLASKR_SETTINGS', silent=True)
-from jobscheduler.awsjobs.instance import settings
+from webservers.awsjobs.instance import settings
 from flask_sqlalchemy import SQLAlchemy
 parser = reqparse.RequestParser()
 #import pymysql

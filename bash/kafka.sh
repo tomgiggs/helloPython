@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 advertised.listeners=PLAINTEXT://18.191.x.x:9092：从外网无法访问，内网也无法访问
 
 
