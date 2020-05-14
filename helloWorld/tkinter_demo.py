@@ -3,7 +3,7 @@ import _tkinter
 
 # import Tkinter
 
-from Tkinter import *
+from tkinter import *# python3.2之前使用这个来导入：from TKinter import *
 from kafka import KafkaConsumer, TopicPartition
 
 root = Tk()
@@ -14,7 +14,7 @@ def start(*args, **kwargs):
     topic_name = topic.get()
     server_host = server.get()
     server_host = server_host + ':9092'
-    print server_host
+    print(server_host)
     t_partition = partition.get()
     if not t_partition:
         t_partition = 0

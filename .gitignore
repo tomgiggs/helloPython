@@ -21,6 +21,7 @@ logs/
 ipynb/.ipynb_checkpoints/
 ipynb/checkpoint/
 ipynb/chkpt/
-machinelearning/tensorflowx/ckpt/
+machinelearning/tensorflowx/ckpt/*
+machinelearning/tensorflowx/model6/
 machinelearning/photo/
 machinelearning/data/

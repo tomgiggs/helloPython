@@ -34,7 +34,7 @@ def sentence_vector(s,model):
 
 def sent_similarity(v1, v2):
     # v1, v2 = sentence_vector(s1), sentence_vector(s2)
-    return np.dot(v1, v2) / (norm(v1) * norm(v2))
+    return np.dot(v1, v2) / (norm(v1) * norm(v2)) # np.dot 矩阵乘法
 
 def text_cleaner_v2(text=None):
     neg_file = open('../data/nltk_1000_neg_reviews.txt',"r")
@@ -96,7 +96,7 @@ def sent_distance():
 
     return lines_vec, labels
 
-sent_distance()
+# sent_distance()
 
 def classify_sent():
     contents,labels = text_cleaner_v2()
@@ -127,3 +127,6 @@ def classify_sent():
     # print(json.dumps(result_dict))
     for k in result_dict:
         print(len(result_dict[k]))
+        print(result_dict[k])
+
+classify_sent()

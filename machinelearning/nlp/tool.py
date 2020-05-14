@@ -6,7 +6,6 @@ stopwords = {
     "zhcn": set([line.strip('\n') for line in open('./stop_words_zhcn.txt', "r", encoding="utf8").readlines()])
 }
 
-
 def remove_special_char(content):
     line = re.sub("[:\.\!\/_,$%^<>*(+\"\'；：“”．]+|[+——！，。？?、~@#￥%……&*（）]+", "", content)
     return line.replace("\n", " ").replace("\t", " ").replace("  ", " ")
