@@ -1,13 +1,11 @@
 # encoding=utf8
+'''
+下面操作参考了https://zhuanlan.zhihu.com/p/62703610的操作，主要是讲图片变成一个类似素描的效果
+'''
 import numpy as np
 from PIL import Image
 from pylab import *
-from scipy import misc
-# 下面操作参考了https://zhuanlan.zhihu.com/p/62703610的操作，主要是讲图片变成一个类似素描的效果
-
-
 import cv2
-
 
 def cvt_photo(img):
     # cv2.imshow('origin', img)
